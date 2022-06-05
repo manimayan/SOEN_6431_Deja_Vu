@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: myste
+Build-Jdk: 11.0.15
+Implementation-Title: PMS
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: me.anant
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/PMS
+Created-By: Maven Integration for Eclipse
+

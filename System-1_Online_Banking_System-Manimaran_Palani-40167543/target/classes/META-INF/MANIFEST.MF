@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: myste
+Build-Jdk: 11.0.15
+Implementation-Title: UserFront
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.userFront
+Implementation-URL: http://projects.spring.io/spring-boot/spring-boot-st
+ arter-parent/userFront/
+Created-By: Maven Integration for Eclipse
+
