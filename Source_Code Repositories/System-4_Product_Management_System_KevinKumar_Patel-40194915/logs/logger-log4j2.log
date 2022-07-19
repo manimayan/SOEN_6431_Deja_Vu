@@ -1,0 +1,6 @@
+2022-06-04 21:22:47,050 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PmsApplication on Mayan-PC with PID 40420 (C:\Users\myste\git\SOEN 6431 - SCM\ProductManagementSystem\target\classes started by myste in C:\Users\myste\git\SOEN 6431 - SCM\ProductManagementSystem)
+2022-06-04 21:22:47,061 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2022-06-04 21:22:47,063 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2022-06-04 21:22:51,934 DEBUG m.a.P.c.LoggingAspect [restartedMain] Enter: me.anant.PMS.config.WebSecurityConfig.authProvider() with argument[s] = []
+2022-06-04 21:22:51,951 DEBUG m.a.P.c.LoggingAspect [restartedMain] Exit: me.anant.PMS.config.WebSecurityConfig.authProvider() with result = org.springframework.security.authentication.dao.DaoAuthenticationProvider@4c0f356e
+2022-06-04 21:22:52,490 INFO o.s.b.StartupInfoLogger [restartedMain] Started PmsApplication in 5.794 seconds (JVM running for 7.438)
