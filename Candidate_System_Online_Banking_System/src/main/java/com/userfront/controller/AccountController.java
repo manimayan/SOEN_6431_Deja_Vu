@@ -19,19 +19,33 @@ import com.userfront.service.AccountService;
 import com.userfront.service.TransactionService;
 import com.userfront.service.UserService;
 
+ 
+/**
+ * The Class AccountController.
+ */
 @Controller
 @RequestMapping("/account")
 public class AccountController {
 	
+	/** The user service. */
 	@Autowired
     private UserService userService;
 	
+	/** The account service. */
 	@Autowired
 	private AccountService accountService;
 	
+	/** The transaction service. */
 	@Autowired
 	private TransactionService transactionService;
 	
+	/**
+	 * Primary account.
+	 *
+	 * @param model the model
+	 * @param principal the principal
+	 * @return the string
+	 */
 	@RequestMapping("/primaryAccount")
 	public String primaryAccount(Model model, Principal principal) {
 		List<PrimaryTransaction> primaryTransactionList = transactionService.findPrimaryTransactionList(principal.getName());
@@ -45,6 +59,13 @@ public class AccountController {
 		return "primaryAccount";
 	}
 
+	/**
+	 * Savings account.
+	 *
+	 * @param model the model
+	 * @param principal the principal
+	 * @return the string
+	 */
 	@RequestMapping("/savingsAccount")
     public String savingsAccount(Model model, Principal principal) {
 		List<SavingsTransaction> savingsTransactionList = transactionService.findSavingsTransactionList(principal.getName());
@@ -57,6 +78,12 @@ public class AccountController {
         return "savingsAccount";
     }
 	
+	/**
+	 * Deposit.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
     public String deposit(Model model) {
         model.addAttribute("accountType", "");
@@ -65,6 +92,14 @@ public class AccountController {
         return "deposit";
     }
 
+    /**
+     * Deposit POST.
+     *
+     * @param amount the amount
+     * @param accountType the account type
+     * @param principal the principal
+     * @return the string
+     */
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
         accountService.deposit(accountType, Double.parseDouble(amount), principal);
@@ -72,6 +107,12 @@ public class AccountController {
         return "redirect:/userFront";
     }
     
+    /**
+     * Withdraw.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(value = "/withdraw", method = RequestMethod.GET)
     public String withdraw(Model model) {
         model.addAttribute("accountType", "");
@@ -80,6 +121,14 @@ public class AccountController {
         return "withdraw";
     }
 
+    /**
+     * Withdraw POST.
+     *
+     * @param amount the amount
+     * @param accountType the account type
+     * @param principal the principal
+     * @return the string
+     */
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
     public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
         accountService.withdraw(accountType, Double.parseDouble(amount), principal);

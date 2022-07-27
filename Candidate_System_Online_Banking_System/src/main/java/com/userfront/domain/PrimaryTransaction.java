@@ -10,98 +10,69 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
+
+/**
+ * The Class PrimaryTransaction.
+ */
 @Entity
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
+@Data
 public class PrimaryTransaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Date date;
-    private String description;
-    private String type;
-    private String status;
-    private double amount;
-    private BigDecimal availableBalance;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    public PrimaryTransaction() {}
+	/** The date. */
+	private Date date;
 
+	/** The description. */
+	private String description;
 
-    public PrimaryTransaction(Date date, String description, String type, String status, double amount, BigDecimal availableBalance, PrimaryAccount primaryAccount) {
-        this.date = date;
-        this.description = description;
-        this.type = type;
-        this.status = status;
-        this.amount = amount;
-        this.availableBalance = availableBalance;
-        this.primaryAccount = primaryAccount;
-    }
+	/** The type. */
+	private String type;
 
-    @ManyToOne
-    @JoinColumn(name = "primary_account_id")
-    private PrimaryAccount primaryAccount;
+	/** The status. */
+	private String status;
 
-    public Long getId() {
-        return id;
-    }
+	/** The amount. */
+	private double amount;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/** The available balance. */
+	private BigDecimal availableBalance;
 
-    public Date getDate() {
-        return date;
-    }
+	/** The primary account. */
+	@ManyToOne
+	@JoinColumn(name = "primary_account_id")
+	private PrimaryAccount primaryAccount;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public BigDecimal getAvailableBalance() {
-        return availableBalance;
-    }
-
-    public void setAvailableBalance(BigDecimal availableBalance) {
-        this.availableBalance = availableBalance;
-    }
-
-    public PrimaryAccount getPrimaryAccount() {
-        return primaryAccount;
-    }
-
-    public void setPrimaryAccount(PrimaryAccount primaryAccount) {
-        this.primaryAccount = primaryAccount;
-    }
+	/**
+	 * Instantiates a new primary transaction.
+	 *
+	 * @param date             the date
+	 * @param description      the description
+	 * @param type             the type
+	 * @param status           the status
+	 * @param amount           the amount
+	 * @param availableBalance the available balance
+	 * @param primaryAccount   the primary account
+	 */
+	public PrimaryTransaction(Date date, String description, String type, String status, double amount,
+			BigDecimal availableBalance, PrimaryAccount primaryAccount) {
+		this.date = date;
+		this.description = description;
+		this.type = type;
+		this.status = status;
+		this.amount = amount;
+		this.availableBalance = availableBalance;
+		this.primaryAccount = primaryAccount;
+	}
 
 }

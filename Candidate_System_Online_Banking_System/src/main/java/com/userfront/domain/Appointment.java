@@ -9,77 +9,77 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * The Class Appointment.
+ */
 @Entity
+
+/**
+ * Instantiates a new appointment.
+ */
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
+@Data
+
+/**
+ * Instantiates a new appointment.
+ *
+ * @param id the id
+ * @param date the date
+ * @param location the location
+ * @param description the description
+ * @param confirmed the confirmed
+ * @param user the user
+ */
+@AllArgsConstructor
+
+/**
+ * Instantiates a new appointment.
+ */
+@NoArgsConstructor
 public class Appointment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Date date;
-    private String location;
-    private String description;
-    private boolean confirmed;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+	/** The date. */
+	private Date date;
 
-    public Long getId() {
-        return id;
-    }
+	/** The location. */
+	private String location;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/** The description. */
+	private String description;
 
-    public Date getDate() {
-        return date;
-    }
+	/** The confirmed. */
+	private boolean confirmed;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	/** The user. */
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "id=" + id +
-                ", date=" + date +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                ", user=" + user +
-                '}';
-    }
+	/**
+	 * Instantiates a new appointment.
+	 *
+	 * @param appointment the appointment
+	 */
+	public Appointment(Appointment appointment) {
+		this.user = appointment.user;
+		this.confirmed = appointment.confirmed;
+		this.date = appointment.date;
+		this.description = appointment.description;
+		this.id = appointment.id;
+		this.location = appointment.location;
+	}
 }

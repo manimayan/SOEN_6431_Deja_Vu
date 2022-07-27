@@ -11,14 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.userfront.domain.Appointment;
 import com.userfront.service.AppointmentService;
 
+ 
+/**
+ * The Class AppointmentResource.
+ */
 @RestController
 @RequestMapping("/api/appointment")
 @PreAuthorize("hasRole('ADMIN')")
 public class AppointmentResource {
 
+    /** The appointment service. */
     @Autowired
     private AppointmentService appointmentService;
 
+    /**
+     * Find appointment list.
+     *
+     * @return the list
+     */
     @RequestMapping("/all")
     public List<Appointment> findAppointmentList() {
         List<Appointment> appointmentList = appointmentService.findAll();
@@ -26,6 +36,11 @@ public class AppointmentResource {
         return appointmentList;
     }
 
+    /**
+     * Confirm appointment.
+     *
+     * @param id the id
+     */
     @RequestMapping("/{id}/confirm")
     public void confirmAppointment(@PathVariable("id") Long id) {
         appointmentService.confirmAppointment(id);

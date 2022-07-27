@@ -12,13 +12,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.userfront.domain.User;
 import com.userfront.service.UserService;
 
+ 
+/**
+ * The Class UserController.
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
+    /** The user service. */
     @Autowired
     private UserService userService;
 
+    /**
+     * Profile.
+     *
+     * @param principal the principal
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
@@ -28,6 +40,13 @@ public class UserController {
         return "profile";
     }
 
+    /**
+     * Profile post.
+     *
+     * @param newUser the new user
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String profilePost(@ModelAttribute("user") User newUser, Model model) {
         User user = userService.findByUsername(newUser.getUsername());

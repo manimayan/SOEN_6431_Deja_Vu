@@ -22,186 +22,124 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.userfront.domain.security.Authority;
 import com.userfront.domain.security.UserRole;
 
+import lombok.Data;
+
+/**
+ * The Class User.
+ */
 @Entity
-public class User implements UserDetails{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "userId", nullable = false, updatable = false)
-    private Long userId;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
+/**
+ * Instantiates a new user.
+ */
+@Data
+public class User implements UserDetails {
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-    private String phone;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private boolean enabled=true;
+	/** The user id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "userId", nullable = false, updatable = false)
+	private Long userId;
 
-    @OneToOne
-    private PrimaryAccount primaryAccount;
+	/** The username. */
+	private String username;
 
-    @OneToOne
-    private SavingsAccount savingsAccount;
+	/** The password. */
+	private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Appointment> appointmentList;
+	/** The first name. */
+	private String firstName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Recipient> recipientList;
+	/** The last name. */
+	private String lastName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
+	/** The email. */
+	@Column(name = "email", nullable = false, unique = true)
+	private String email;
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
+	/** The phone. */
+	private String phone;
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
+	/** The enabled. */
+	private boolean enabled = true;
 
-    public Long getUserId() {
-        return userId;
-    }
+	/** The primary account. */
+	@OneToOne
+	private PrimaryAccount primaryAccount;
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	/** The savings account. */
+	@OneToOne
+	private SavingsAccount savingsAccount;
 
-    public String getUsername() {
-        return username;
-    }
+	/** The appointment list. */
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Appointment> appointmentList;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	/** The recipient list. */
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Recipient> recipientList;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	/** The user roles. */
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	private Set<UserRole> userRoles = new HashSet<>();
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	/**
+	 * Gets the authorities.
+	 *
+	 * @return the authorities
+	 */
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+		return authorities;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	/**
+	 * Checks if is account non expired.
+	 *
+	 * @return true, if is account non expired
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	/**
+	 * Checks if is account non locked.
+	 *
+	 * @return true, if is account non locked
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	/**
+	 * Checks if is credentials non expired.
+	 *
+	 * @return true, if is credentials non expired
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public List<Appointment> getAppointmentList() {
-        return appointmentList;
-    }
-
-    public void setAppointmentList(List<Appointment> appointmentList) {
-        this.appointmentList = appointmentList;
-    }
-
-    public List<Recipient> getRecipientList() {
-        return recipientList;
-    }
-
-    public void setRecipientList(List<Recipient> recipientList) {
-        this.recipientList = recipientList;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public PrimaryAccount getPrimaryAccount() {
-        return primaryAccount;
-    }
-
-    public void setPrimaryAccount(PrimaryAccount primaryAccount) {
-        this.primaryAccount = primaryAccount;
-    }
-
-    public SavingsAccount getSavingsAccount() {
-        return savingsAccount;
-    }
-
-    public void setSavingsAccount(SavingsAccount savingsAccount) {
-        this.savingsAccount = savingsAccount;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", appointmentList=" + appointmentList +
-                ", recipientList=" + recipientList +
-                ", userRoles=" + userRoles +
-                '}';
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-        return authorities;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
+	/**
+	 * Checks if is enabled.
+	 *
+	 * @return true, if is enabled
+	 */
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
 
 }

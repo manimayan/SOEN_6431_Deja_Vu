@@ -13,53 +13,33 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+/**
+ * The Class PrimaryAccount.
+ */
 @Entity
+
+/**
+ * Instantiates a new primary account.
+ */
+@Data
 public class PrimaryAccount {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private int accountNumber;
-    private BigDecimal accountBalance;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<PrimaryTransaction> primaryTransactionList;
+	/** The account number. */
+	private int accountNumber;
 
-    public Long getId() {
-        return id;
-    }
+	/** The account balance. */
+	private BigDecimal accountBalance;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public BigDecimal getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(BigDecimal accountBalance) {
-        this.accountBalance = accountBalance;
-    }
-
-    public List<PrimaryTransaction> getPrimaryTransactionList() {
-        return primaryTransactionList;
-    }
-
-    public void setPrimaryTransactionList(List<PrimaryTransaction> primaryTransactionList) {
-        this.primaryTransactionList = primaryTransactionList;
-    }
-
+	/** The primary transaction list. */
+	@OneToMany(mappedBy = "primaryAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<PrimaryTransaction> primaryTransactionList;
 
 }
-
-
-

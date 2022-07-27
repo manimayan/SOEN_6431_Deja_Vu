@@ -18,25 +18,47 @@ import com.userfront.domain.User;
 import com.userfront.domain.security.UserRole;
 import com.userfront.service.UserService;
 
+ 
+/**
+ * The Class HomeController.
+ */
 @Controller
 public class HomeController {
 	
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 	
+	/** The role dao. */
 	@Autowired
     private RoleDao roleDao;
 	
+	/**
+	 * Home.
+	 *
+	 * @return the string
+	 */
 	@RequestMapping("/")
 	public String home() {
 		return "redirect:/index";
 	}
 	
+	/**
+	 * Index.
+	 *
+	 * @return the string
+	 */
 	@RequestMapping("/index")
     public String index() {
         return "index";
     }
 	
+	/**
+	 * Signup.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup(Model model) {
         User user = new User();
@@ -46,6 +68,13 @@ public class HomeController {
         return "signup";
     }
 	
+	/**
+	 * Signup post.
+	 *
+	 * @param user the user
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupPost(@ModelAttribute("user") User user,  Model model) {
 
@@ -70,6 +99,13 @@ public class HomeController {
         }
     }
 	
+	/**
+	 * User front.
+	 *
+	 * @param principal the principal
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping("/userFront")
 	public String userFront(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());

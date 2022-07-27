@@ -13,50 +13,33 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+/**
+ * The Class SavingsAccount.
+ */
 @Entity
+
+/**
+ * Instantiates a new savings account.
+ */
+@Data
 public class SavingsAccount {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private int accountNumber;
-    private BigDecimal accountBalance;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<SavingsTransaction> savingsTransactionList;
+	/** The account number. */
+	private int accountNumber;
 
-    public Long getId() {
-        return id;
-    }
+	/** The account balance. */
+	private BigDecimal accountBalance;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public BigDecimal getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(BigDecimal accountBalance) {
-        this.accountBalance = accountBalance;
-    }
-
-    public List<SavingsTransaction> getSavingsTransactionList() {
-        return savingsTransactionList;
-    }
-
-    public void setSavingsTransactionList(List<SavingsTransaction> savingsTransactionList) {
-        this.savingsTransactionList = savingsTransactionList;
-    }
-
+	/** The savings transaction list. */
+	@OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<SavingsTransaction> savingsTransactionList;
 
 }

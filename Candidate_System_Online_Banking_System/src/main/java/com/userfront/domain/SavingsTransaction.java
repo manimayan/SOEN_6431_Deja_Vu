@@ -10,96 +10,69 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
+
+/**
+ * The Class SavingsTransaction.
+ */
 @Entity
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
+@Data
 public class SavingsTransaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Date date;
-    private String description;
-    private String type;
-    private String status;
-    private double amount;
-    private BigDecimal availableBalance;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "savings_account_id")
-    private SavingsAccount savingsAccount;
+	/** The date. */
+	private Date date;
 
-    public SavingsTransaction() {}
+	/** The description. */
+	private String description;
 
-    public SavingsTransaction(Date date, String description, String type, String status, double amount, BigDecimal availableBalance, SavingsAccount savingsAccount) {
-        this.date = date;
-        this.description = description;
-        this.type = type;
-        this.status = status;
-        this.amount = amount;
-        this.availableBalance = availableBalance;
-        this.savingsAccount = savingsAccount;
-    }
+	/** The type. */
+	private String type;
 
-    public Long getId() {
-        return id;
-    }
+	/** The status. */
+	private String status;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/** The amount. */
+	private double amount;
 
-    public Date getDate() {
-        return date;
-    }
+	/** The available balance. */
+	private BigDecimal availableBalance;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	/** The savings account. */
+	@ManyToOne
+	@JoinColumn(name = "savings_account_id")
+	private SavingsAccount savingsAccount;
 
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * Instantiates a new savings transaction.
+	 *
+	 * @param date             the date
+	 * @param description      the description
+	 * @param type             the type
+	 * @param status           the status
+	 * @param amount           the amount
+	 * @param availableBalance the available balance
+	 * @param savingsAccount   the savings account
+	 */
+	public SavingsTransaction(Date date, String description, String type, String status, double amount,
+			BigDecimal availableBalance, SavingsAccount savingsAccount) {
+		this.date = date;
+		this.description = description;
+		this.type = type;
+		this.status = status;
+		this.amount = amount;
+		this.availableBalance = availableBalance;
+		this.savingsAccount = savingsAccount;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public BigDecimal getAvailableBalance() {
-        return availableBalance;
-    }
-
-    public void setAvailableBalance(BigDecimal availableBalance) {
-        this.availableBalance = availableBalance;
-    }
-
-    public SavingsAccount getSavingsAccount() {
-        return savingsAccount;
-    }
-
-    public void setSavingsAccount(SavingsAccount savingsAccount) {
-        this.savingsAccount = savingsAccount;
-    }
 }

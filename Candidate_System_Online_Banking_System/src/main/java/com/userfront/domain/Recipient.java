@@ -9,77 +9,43 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+/**
+ * The Class Recipient.
+ */
 @Entity
+
+/**
+ * Instantiates a new recipient.
+ */
+@Data
 public class Recipient {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
-    private String email;
-    private String phone;
-    private String accountNumber;
-    private String description;
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User user;
+	/** The name. */
+	private String name;
 
-    public Long getId() {
-        return id;
-    }
+	/** The email. */
+	private String email;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/** The phone. */
+	private String phone;
 
-    public String getName() {
-        return name;
-    }
+	/** The account number. */
+	private String accountNumber;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	/** The description. */
+	private String description;
 
-    public String getEmail() {
-        return email;
-    }
+	/** The user. */
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	private User user;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
-
